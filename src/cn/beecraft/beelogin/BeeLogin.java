@@ -43,11 +43,11 @@ import org.bukkit.scheduler.BukkitTask;
 public class BeeLogin extends JavaPlugin implements Listener {
 
 	/**
-	 * »ñÈ¡×Ö·û´®µÄMD5ÖµµÄMD5Öµ
+	 * è·å–å­—ç¬¦ä¸²çš„MD5å€¼çš„MD5å€¼
 	 * 
 	 * @param string
-	 *            ĞèÒª¼ÆËãMD5µÄ×Ö·û´®
-	 * @return MD5 ×Ö·û´®Á½´Î¼ÆËãMD5ºóµÄÖµ
+	 *            éœ€è¦è®¡ç®—MD5çš„å­—ç¬¦ä¸²
+	 * @return MD5 å­—ç¬¦ä¸²ä¸¤æ¬¡è®¡ç®—MD5åçš„å€¼
 	 */
 	private static String getMd5Twice(String string) {
 		string = getMd5(string).toLowerCase();
@@ -56,11 +56,11 @@ public class BeeLogin extends JavaPlugin implements Listener {
 	}
 
 	/**
-	 * »ñÈ¡×Ö·û´®µÄMD5Öµ
+	 * è·å–å­—ç¬¦ä¸²çš„MD5å€¼
 	 * 
 	 * @param string
-	 *            ĞèÒª¼ÆËãMD5µÄ×Ö·û´®
-	 * @return MD5 ×Ö·û´®µÄMD5
+	 *            éœ€è¦è®¡ç®—MD5çš„å­—ç¬¦ä¸²
+	 * @return MD5 å­—ç¬¦ä¸²çš„MD5
 	 */
 	private static String getMd5(String string) {
 		char hexDigits[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
@@ -84,13 +84,13 @@ public class BeeLogin extends JavaPlugin implements Listener {
 	}
 
 	/**
-	 * ÏòÖ¸¶¨URL·¢ËÍGET·½·¨µÄÇëÇó
+	 * å‘æŒ‡å®šURLå‘é€GETæ–¹æ³•çš„è¯·æ±‚
 	 * 
 	 * @param url
-	 *            ·¢ËÍÇëÇóµÄURL
+	 *            å‘é€è¯·æ±‚çš„URL
 	 * @param param
-	 *            ÇëÇó²ÎÊı£¬ÇëÇó²ÎÊıÓ¦¸ÃÊÇ name1=value1&name2=value2 µÄĞÎÊ½¡£
-	 * @return URL Ëù´ú±íÔ¶³Ì×ÊÔ´µÄÏìÓ¦½á¹û
+	 *            è¯·æ±‚å‚æ•°ï¼Œè¯·æ±‚å‚æ•°åº”è¯¥æ˜¯ name1=value1&name2=value2 çš„å½¢å¼ã€‚
+	 * @return URL æ‰€ä»£è¡¨è¿œç¨‹èµ„æºçš„å“åº”ç»“æœ
 	 * @throws Exception
 	 */
 	private static String sendGet(String url, String param) throws Exception {
@@ -99,21 +99,21 @@ public class BeeLogin extends JavaPlugin implements Listener {
 		try {
 			String urlNameString = url + "?" + param;
 			URL realUrl = new URL(urlNameString);
-			// ´ò¿ªºÍURLÖ®¼äµÄÁ¬½Ó
+			// æ‰“å¼€å’ŒURLä¹‹é—´çš„è¿æ¥
 			URLConnection connection = realUrl.openConnection();
-			// ÉèÖÃÍ¨ÓÃµÄÇëÇóÊôĞÔ
+			// è®¾ç½®é€šç”¨çš„è¯·æ±‚å±æ€§
 			connection.setRequestProperty("accept", "*/*");
 			connection.setRequestProperty("connection", "Keep-Alive");
 			connection.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
-			// ½¨Á¢Êµ¼ÊµÄÁ¬½Ó
+			// å»ºç«‹å®é™…çš„è¿æ¥
 			connection.connect();
-			// »ñÈ¡ËùÓĞÏìÓ¦Í·×Ö¶Î
+			// è·å–æ‰€æœ‰å“åº”å¤´å­—æ®µ
 			// Map<String, List<String>> map = connection.getHeaderFields();
-			// ±éÀúËùÓĞµÄÏìÓ¦Í·×Ö¶Î
+			// éå†æ‰€æœ‰çš„å“åº”å¤´å­—æ®µ
 			// for (String key : map.keySet()) {
 			// System.out.println(key + "--->" + map.get(key));
 			// }
-			// ¶¨Òå BufferedReaderÊäÈëÁ÷À´¶ÁÈ¡URLµÄÏìÓ¦
+			// å®šä¹‰ BufferedReaderè¾“å…¥æµæ¥è¯»å–URLçš„å“åº”
 			in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 			String line;
 			while ((line = in.readLine()) != null) {
@@ -122,7 +122,7 @@ public class BeeLogin extends JavaPlugin implements Listener {
 		} catch (Exception e) {
 			throw e;
 		}
-		// Ê¹ÓÃfinally¿éÀ´¹Ø±ÕÊäÈëÁ÷
+		// ä½¿ç”¨finallyå—æ¥å…³é—­è¾“å…¥æµ
 		finally {
 			try {
 				if (in != null) {
@@ -136,13 +136,13 @@ public class BeeLogin extends JavaPlugin implements Listener {
 	}
 
 	/**
-	 * ÏòÖ¸¶¨ URL ·¢ËÍPOST·½·¨µÄÇëÇó
+	 * å‘æŒ‡å®š URL å‘é€POSTæ–¹æ³•çš„è¯·æ±‚
 	 * 
 	 * @param url
-	 *            ·¢ËÍÇëÇóµÄ URL
+	 *            å‘é€è¯·æ±‚çš„ URL
 	 * @param param
-	 *            ÇëÇó²ÎÊı£¬ÇëÇó²ÎÊıÓ¦¸ÃÊÇ name1=value1&name2=value2 µÄĞÎÊ½¡£
-	 * @return Ëù´ú±íÔ¶³Ì×ÊÔ´µÄÏìÓ¦½á¹û
+	 *            è¯·æ±‚å‚æ•°ï¼Œè¯·æ±‚å‚æ•°åº”è¯¥æ˜¯ name1=value1&name2=value2 çš„å½¢å¼ã€‚
+	 * @return æ‰€ä»£è¡¨è¿œç¨‹èµ„æºçš„å“åº”ç»“æœ
 	 * @throws Exception
 	 */
 	private static String sendPost(String url, String param) throws Exception {
@@ -151,22 +151,22 @@ public class BeeLogin extends JavaPlugin implements Listener {
 		String result = "";
 		try {
 			URL realUrl = new URL(url);
-			// ´ò¿ªºÍURLÖ®¼äµÄÁ¬½Ó
+			// æ‰“å¼€å’ŒURLä¹‹é—´çš„è¿æ¥
 			URLConnection conn = realUrl.openConnection();
-			// ÉèÖÃÍ¨ÓÃµÄÇëÇóÊôĞÔ
+			// è®¾ç½®é€šç”¨çš„è¯·æ±‚å±æ€§
 			conn.setRequestProperty("accept", "*/*");
 			conn.setRequestProperty("connection", "Keep-Alive");
 			conn.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
-			// ·¢ËÍPOSTÇëÇó±ØĞëÉèÖÃÈçÏÂÁ½ĞĞ
+			// å‘é€POSTè¯·æ±‚å¿…é¡»è®¾ç½®å¦‚ä¸‹ä¸¤è¡Œ
 			conn.setDoOutput(true);
 			conn.setDoInput(true);
-			// »ñÈ¡URLConnection¶ÔÏó¶ÔÓ¦µÄÊä³öÁ÷
+			// è·å–URLConnectionå¯¹è±¡å¯¹åº”çš„è¾“å‡ºæµ
 			out = new PrintWriter(conn.getOutputStream());
-			// ·¢ËÍÇëÇó²ÎÊı
+			// å‘é€è¯·æ±‚å‚æ•°
 			out.print(param);
-			// flushÊä³öÁ÷µÄ»º³å
+			// flushè¾“å‡ºæµçš„ç¼“å†²
 			out.flush();
-			// ¶¨ÒåBufferedReaderÊäÈëÁ÷À´¶ÁÈ¡URLµÄÏìÓ¦
+			// å®šä¹‰BufferedReaderè¾“å…¥æµæ¥è¯»å–URLçš„å“åº”
 			in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			String line;
 			while ((line = in.readLine()) != null) {
@@ -175,7 +175,7 @@ public class BeeLogin extends JavaPlugin implements Listener {
 		} catch (Exception e) {
 			throw e;
 		}
-		// Ê¹ÓÃfinally¿éÀ´¹Ø±ÕÊä³öÁ÷¡¢ÊäÈëÁ÷
+		// ä½¿ç”¨finallyå—æ¥å…³é—­è¾“å‡ºæµã€è¾“å…¥æµ
 		finally {
 			try {
 				if (out != null) {
@@ -213,9 +213,9 @@ public class BeeLogin extends JavaPlugin implements Listener {
 
 	public void onEnable() {
 		this.getConfig().addDefault("configVersion", "0");
-		this.getConfig().addDefault("kickMessage", "ÇëĞŞ¸ÄÅäÖÃÎÄ¼ş!²¢È·¶¨ÎÄ¼ş±àÂë£¡");
-		this.getConfig().addDefault("ipErrorMessage", "ÇëĞŞ¸ÄÅäÖÃÎÄ¼ş!²¢È·¶¨ÎÄ¼ş±àÂë£¡ÄúµÄIPÊÇ£º%UserIp%");
-		this.getConfig().addDefault("unknowErrorMessage", "ÇëĞŞ¸ÄÅäÖÃÎÄ¼ş!²¢È·¶¨ÎÄ¼ş±àÂë£¡ÄúµÄIPÊÇ£º%UserIp%");
+		this.getConfig().addDefault("kickMessage", "è¯·ä¿®æ”¹é…ç½®æ–‡ä»¶!å¹¶ç¡®å®šæ–‡ä»¶ç¼–ç ï¼");
+		this.getConfig().addDefault("ipErrorMessage", "è¯·ä¿®æ”¹é…ç½®æ–‡ä»¶!å¹¶ç¡®å®šæ–‡ä»¶ç¼–ç ï¼æ‚¨çš„IPæ˜¯ï¼š%UserIp%");
+		this.getConfig().addDefault("unknowErrorMessage", "è¯·ä¿®æ”¹é…ç½®æ–‡ä»¶!å¹¶ç¡®å®šæ–‡ä»¶ç¼–ç ï¼æ‚¨çš„IPæ˜¯ï¼š%UserIp%");
 		this.getConfig().addDefault("serverPassword", "");
 		this.getConfig().addDefault("badIpResult", "badip");
 		this.getConfig().addDefault("allowJoinResult", "yes");
@@ -227,7 +227,7 @@ public class BeeLogin extends JavaPlugin implements Listener {
 		this.getConfig().addDefault("skipOnSiteLocalAddress", false);
 		this.getConfig().addDefault("usingBeeLoginUIMod", false);
 		this.getConfig().addDefault("timeOutLimited", 20);
-		this.getConfig().addDefault("timeOutMessage", "µÇÂ¼³¬Ê±");
+		this.getConfig().addDefault("timeOutMessage", "ç™»å½•è¶…æ—¶");
 		this.getConfig().addDefault("sendDelay", 20);
 		if (!getDataFolder().exists())
 			getDataFolder().mkdir();
@@ -259,18 +259,18 @@ public class BeeLogin extends JavaPlugin implements Listener {
 			Bukkit.getMessenger().registerIncomingPluginChannel(this, "BeeLogin", new BeeLoginMessageListener());
 		}
 		Bukkit.getPluginManager().registerEvents(this, this);
-		getLogger().info("BeeLogin¼ÓÔØ³É¹¦");
+		getLogger().info("BeeLoginåŠ è½½æˆåŠŸ");
 		getLogger().info("====================");
-		getLogger().info("ÃÛ·ä¹¤×÷ÊÒ BeeStudio");
-		getLogger().info("      ÈÙÓş³öÆ·");
-		getLogger().info("ÌÖÂÛQQÈº:  367428642");
+		getLogger().info("èœœèœ‚å·¥ä½œå®¤ BeeStudio");
+		getLogger().info("      è£èª‰å‡ºå“");
+		getLogger().info("è®¨è®ºQQç¾¤:  367428642");
 		getLogger().info("====================");
-		getLogger().info("µ±Ç°ÍøÒ³¶ËÑéÖ¤URL:" + checkUrl);
-		getLogger().info("µ±Ç°ÍøÒ³¶ËIP»ñÈ¡URL:" + sendIpUrl);
+		getLogger().info("å½“å‰ç½‘é¡µç«¯éªŒè¯URL:" + checkUrl);
+		getLogger().info("å½“å‰ç½‘é¡µç«¯IPè·å–URL:" + sendIpUrl);
 	}
 
 	public void onDisable() {
-		getLogger().info("BeeLoginĞ¶ÔØ³É¹¦");
+		getLogger().info("BeeLoginå¸è½½æˆåŠŸ");
 	}
 
 	@EventHandler(priority = EventPriority.HIGHEST)
@@ -282,7 +282,7 @@ public class BeeLogin extends JavaPlugin implements Listener {
 		}
 		try {
 			sendGet(sendIpUrl, "ip=" + evt.getAddress().getHostAddress().replace("/", "") + "&n=" + evt.getName());
-			// ÏòÍøÒ³¶Ë·¢ËÍÍæ¼ÒµÄipµØÖ·
+			// å‘ç½‘é¡µç«¯å‘é€ç©å®¶çš„ipåœ°å€
 		} catch (Exception e) {
 			evt.setLoginResult(AsyncPlayerPreLoginEvent.Result.KICK_OTHER);
 			evt.setKickMessage(unknowErrorMessage);
@@ -330,7 +330,7 @@ public class BeeLogin extends JavaPlugin implements Listener {
 		isLogin.remove(evt.getPlayer().getName().toLowerCase());
 		if (kickerMap.get(evt.getPlayer().getName().toLowerCase()) == null) {
 			evt.getPlayer().kickPlayer(unknowErrorMessage);
-			getLogger().log(java.util.logging.Level.WARNING, "ÔÚÍæ¼Ò" + evt.getPlayer().getName() + "µÇÂ¼Ê±Ìß³öÆ÷·¢Éú´íÎó");
+			getLogger().log(java.util.logging.Level.WARNING, "åœ¨ç©å®¶" + evt.getPlayer().getName() + "ç™»å½•æ—¶è¸¢å‡ºå™¨å‘ç”Ÿé”™è¯¯");
 			return;
 		}
 		kickerMap.get(evt.getPlayer().getName().toLowerCase()).cancel();
@@ -482,7 +482,7 @@ public class BeeLogin extends JavaPlugin implements Listener {
 			String serverIp, String serverPassword, String playerToken) {
 		String queryResult = "";
 		if ((queryMode.equalsIgnoreCase("post")) && (encodeMode.equalsIgnoreCase("md5"))) {
-			System.out.println("Ä£Ê½:POST&MD5 ÇëÇó²ÎÊı:username=" + getMd5(playerName).toLowerCase() + "&ip="
+			System.out.println("æ¨¡å¼:POST&MD5 è¯·æ±‚å‚æ•°:username=" + getMd5(playerName).toLowerCase() + "&ip="
 					+ getMd5Twice(playerIp) + "&sip=" + getMd5Twice(serverIp) + "&spsd=" + getMd5Twice(serverPassword)
 					+ "&token=" + getMd5Twice(playerToken));
 			try {
@@ -497,7 +497,7 @@ public class BeeLogin extends JavaPlugin implements Listener {
 			}
 			return queryResult;
 		} else if ((!queryMode.equalsIgnoreCase("post")) && (!encodeMode.equalsIgnoreCase("md5"))) {
-			getLogger().info("Ä£Ê½:GET&Ã÷ÎÄ ÇëÇó²ÎÊı:username=" + playerName + "&ip=" + playerIp + "&sip=" + serverIp + "&spsd="
+			getLogger().info("æ¨¡å¼:GET&æ˜æ–‡ è¯·æ±‚å‚æ•°:username=" + playerName + "&ip=" + playerIp + "&sip=" + serverIp + "&spsd="
 					+ serverPassword + "&token=" + playerToken);
 			try {
 				queryResult = sendGet(url, "username=" + playerName + "&ip=" + playerIp + "&sip=" + serverIp + "&spsd="
@@ -509,7 +509,7 @@ public class BeeLogin extends JavaPlugin implements Listener {
 			}
 			return queryResult;
 		} else if ((queryMode.equalsIgnoreCase("post")) && (!encodeMode.equalsIgnoreCase("md5"))) {
-			getLogger().info("Ä£Ê½:POST&Ã÷ÎÄ ÇëÇó²ÎÊı:username=" + playerName + "&ip=" + playerIp + "&sip=" + serverIp
+			getLogger().info("æ¨¡å¼:POST&æ˜æ–‡ è¯·æ±‚å‚æ•°:username=" + playerName + "&ip=" + playerIp + "&sip=" + serverIp
 					+ "&spsd=" + serverPassword + "&token=" + playerToken);
 			try {
 				queryResult = sendPost(url, "username=" + playerName + "&ip=" + playerIp + "&sip=" + serverIp + "&spsd="
@@ -521,7 +521,7 @@ public class BeeLogin extends JavaPlugin implements Listener {
 			}
 			return queryResult;
 		} else {
-			getLogger().info("Ä£Ê½:GET&MD5 ÇëÇó²ÎÊı:username=" + getMd5(playerName).toLowerCase() + "&ip="
+			getLogger().info("æ¨¡å¼:GET&MD5 è¯·æ±‚å‚æ•°:username=" + getMd5(playerName).toLowerCase() + "&ip="
 					+ getMd5Twice(playerIp) + "&sip=" + getMd5Twice(serverIp) + "&spsd=" + getMd5Twice(serverPassword)
 					+ "&token=" + getMd5Twice(playerToken));
 			try {
@@ -553,7 +553,7 @@ public class BeeLogin extends JavaPlugin implements Listener {
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 			}
-			getLogger().info("ÕıÔÚ»ñÈ¡Íæ¼Ò" + this.player.getName() + "µÄÇëÇó");
+			getLogger().info("æ­£åœ¨è·å–ç©å®¶" + this.player.getName() + "çš„è¯·æ±‚");
 		}
 	}
 
@@ -592,7 +592,7 @@ public class BeeLogin extends JavaPlugin implements Listener {
 		public void onPluginMessageReceived(String channel, Player player, byte[] message) {
 			if (!usingBeeLoginUIMod)
 				return;
-			getLogger().info("ÒÑ½ÓÊÕµ½Íæ¼Ò" + player.getName() + "·¢³öµÄµÇÂ¼ÇëÇó");
+			getLogger().info("å·²æ¥æ”¶åˆ°ç©å®¶" + player.getName() + "å‘å‡ºçš„ç™»å½•è¯·æ±‚");
 			String playerToken = null;
 			try {
 				playerToken = new String(message, "UTF-8");
@@ -605,12 +605,12 @@ public class BeeLogin extends JavaPlugin implements Listener {
 			if (checkResult.equals(allowJoinResult)) {
 				if (kickerMap.get(player.getName().toLowerCase()) == null) {
 					player.kickPlayer(unknowErrorMessage);
-					getLogger().warning("ÔÚÍæ¼Ò" + player.getName() + "µÇÂ¼Ê±Ìß³öÆ÷·¢Éú´íÎó");
+					getLogger().warning("åœ¨ç©å®¶" + player.getName() + "ç™»å½•æ—¶è¸¢å‡ºå™¨å‘ç”Ÿé”™è¯¯");
 					return;
 				}
 				kickerMap.get(player.getName().toLowerCase()).cancel();
 				isLogin.put(player.getName().toLowerCase(), true);
-				getLogger().info(player.getName() + "³É¹¦µÇÂ¼");
+				getLogger().info(player.getName() + "æˆåŠŸç™»å½•");
 			} else {
 				player.kickPlayer(kickMessage);
 				if (kickerMap.get(player.getName().toLowerCase()) == null) {
