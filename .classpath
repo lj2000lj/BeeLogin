@@ -6,6 +6,6 @@
 			<accessrule kind="accessible" pattern="**"/>
 		</accessrules>
 	</classpathentry>
-	<classpathentry kind="lib" path="spigot-1.7.10-R0.1-20150713-1.jar"/>
+	<classpathentry kind="lib" path="spigot.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
