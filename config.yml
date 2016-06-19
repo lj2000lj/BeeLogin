@@ -1,5 +1,5 @@
 #配置文件版本，请勿修改
-configVersion: '1'
+configVersion: '2'
 
 #未登录提示
 kickMessage: '请修改配置文件!'
@@ -44,4 +44,7 @@ usingBeeLoginUIMod: false
 timeOutLimited: 20
 
 #使用mod时的超时提示
-timeOutMessage: '登录超时'
+timeOutMessage: '请检查配置文件！'
+
+#进服多久后发送登录信息（默认20毫秒）
+sendDelay: 20
