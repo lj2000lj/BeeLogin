@@ -11,5 +11,5 @@ README仍在施工……
 	插件发布贴：http://www.mcbbs.net/thread-457773-1-1.html
 	辅助mod：http://www.mcbbs.net/thread-567968-1-1.html
 	启动器：http://www.mcbbs.net/thread-509884-1-1.html
-###联系方式
+##联系方式
 	开发者Q群： 367428642  加群请说明来历	
