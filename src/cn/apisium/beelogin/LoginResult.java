@@ -4,7 +4,7 @@ import static cn.apisium.util.ChecksumUtil.md5;
 import static cn.apisium.util.ChecksumUtil.md5twice;
 import static cn.apisium.util.HttpUtil.send;
 
-import org.bukkit.craftbukkit.libs.com.google.gson.Gson;
+import com.google.gson.Gson;
 
 import cn.apisium.util.HttpUtil.HttpRequestType;
 

@@ -25,13 +25,11 @@ import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 
-import com.sun.xml.internal.ws.api.Cancelable;
-
 public class EventCanceler implements Listener {
 
 	@EventHandler(priority = EventPriority.LOWEST)
 	public void anyPlayerEvent(PlayerEvent event){
-		if(!(event instanceof Cancelable))
+		if(!(event instanceof Cancellable))
 			return;
 		if (!usingBeeLoginMod)
 			return;
