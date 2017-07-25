@@ -10,10 +10,8 @@ import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.bukkit.Bukkit;
-
 public class HttpUtil {
-	final static Logger logger = Bukkit.getLogger();
+	final static Logger logger = Logger.getLogger("Apisium Http Client");
 	final static String USER_AGENT = "Mozilla/5.0 Apisium/1.0";
 
 	public static enum HttpRequestType {
@@ -46,9 +44,9 @@ public class HttpUtil {
 			input.close();
 			return response.toString();
 		} catch (MalformedURLException e) {
-			logger.log(Level.WARNING, "网址" + url + "的格式不正确", e);
+			logger.log(Level.WARNING, "The URL:\"" + url + "\" is not in the correct form.", e);
 		} catch (IOException e) {
-			logger.log(Level.WARNING, "获取网页" + url + "的时候发生了错误", e);
+			logger.log(Level.WARNING, "Failed when read from \"" + url + "\".", e);
 		}
 		return null;
 	}
@@ -56,7 +54,17 @@ public class HttpUtil {
 	public static String post(String url, String parameters) {
 		try {
 			URL urlObject = new URL(url);
-			HttpURLConnection connection = (HttpURLConnection) urlObject.openConnection();
+			return post(urlObject, parameters);
+		} catch (MalformedURLException e) {
+			logger.log(Level.WARNING, "The URL:\"" + url + "\" is not in the correct form.", e);
+		}
+		return null;
+
+	}
+
+	public static String post(URL url, String parameters) {
+		try {
+			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 			connection.setRequestMethod("POST");
 			connection.setRequestProperty("User-Agent", USER_AGENT);
 			connection.setDoOutput(true);
@@ -72,10 +80,34 @@ public class HttpUtil {
 			}
 			input.close();
 			return response.toString();
-		} catch (MalformedURLException e) {
-			logger.log(Level.WARNING, "网址" + url + "的格式不正确", e);
 		} catch (IOException e) {
-			logger.log(Level.WARNING, "获取网页" + url + "的时候发生了错误", e);
+			logger.log(Level.WARNING, "Failed when read from \"" + url + "\".", e);
+		}
+		return null;
+
+	}
+
+	public static String postJson(URL url, String json) {
+		try {
+			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+			connection.setRequestMethod("POST");
+			connection.setRequestProperty("Content-Type", "application/json");
+			connection.setRequestProperty("User-Agent", USER_AGENT);
+			connection.setDoOutput(true);
+			DataOutputStream postWrite = new DataOutputStream(connection.getOutputStream());
+			postWrite.writeBytes(json);
+			postWrite.flush();
+			postWrite.close();
+			BufferedReader input = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+			String line;
+			StringBuffer response = new StringBuffer();
+			while ((line = input.readLine()) != null) {
+				response.append(line);
+			}
+			input.close();
+			return response.toString();
+		} catch (IOException e) {
+			logger.log(Level.WARNING, "Failed when read from \"" + url + "\".", e);
 		}
 		return null;
 

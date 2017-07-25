@@ -26,8 +26,12 @@ public class LoginResult {
 			result = true;
 			return;
 		}
-		resultObj = new Gson().fromJson(rawData, GsonResult.class);
-		result = resultObj.result;
+		try {
+			resultObj = new Gson().fromJson(rawData, GsonResult.class);
+			result = resultObj.result;
+		} catch (Exception e) {
+			result = false;
+		}
 	}
 
 	public boolean isBadIp() {

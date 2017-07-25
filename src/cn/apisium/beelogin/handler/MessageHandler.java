@@ -45,6 +45,7 @@ public class MessageHandler implements PluginMessageListener {
 								return;
 							}
 							BeeLogin.kickers.get(player.getName().toLowerCase()).cancel();
+							BeeLogin.kickers.remove(player.getName().toLowerCase());
 						}
 					}
 				}.runTask(BeeLogin.instance);

@@ -6,7 +6,6 @@ import static cn.apisium.beelogin.Config.usingBeeLoginMod;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Cancellable;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -18,7 +17,6 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerEditBookEvent;
-import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
@@ -28,143 +26,131 @@ import org.bukkit.event.player.PlayerPickupItemEvent;
 public class EventCanceler implements Listener {
 
 	@EventHandler(priority = EventPriority.LOWEST)
-	public void anyPlayerEvent(PlayerEvent event){
-		if(!(event instanceof Cancellable))
-			return;
+	public void onPlayerInteract(PlayerInteractEvent event) {
 		if (!usingBeeLoginMod)
 			return;
 		Player player = event.getPlayer();
 		if (!loginStatus.get(player.getName().toLowerCase())) {
-			((Cancellable) event).setCancelled(true);
+			event.setCancelled(true);
 		}
 	}
 
 	@EventHandler(priority = EventPriority.LOWEST)
-	public void onPlayerInteract(PlayerInteractEvent evt) {
+	public void onPlayerInteractenEntity(PlayerInteractEntityEvent event) {
 		if (!usingBeeLoginMod)
 			return;
-		Player player = evt.getPlayer();
+		Player player = event.getPlayer();
 		if (!loginStatus.get(player.getName().toLowerCase())) {
-			evt.setCancelled(true);
+			event.setCancelled(true);
 		}
 	}
 
 	@EventHandler(priority = EventPriority.LOWEST)
-	public void onPlayerInteractenEntity(PlayerInteractEntityEvent evt) {
+	public void onAsyncPlayerChat(AsyncPlayerChatEvent event) {
 		if (!usingBeeLoginMod)
 			return;
-		Player player = evt.getPlayer();
+		Player player = event.getPlayer();
 		if (!loginStatus.get(player.getName().toLowerCase())) {
-			evt.setCancelled(true);
+			event.setCancelled(true);
 		}
 	}
 
 	@EventHandler(priority = EventPriority.LOWEST)
-	public void onAsyncPlayerChat(AsyncPlayerChatEvent evt) {
-		if (!usingBeeLoginMod)
-			return;
-		Player player = evt.getPlayer();
-		if (!loginStatus.get(player.getName().toLowerCase())) {
-			evt.setCancelled(true);
-		}
-	}
-
-	@EventHandler(priority = EventPriority.LOWEST)
-	public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent evt) {
+	public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent event) {
 		if (!usingBeeLoginMod) {
 			return;
 		}
-		Player player = evt.getPlayer();
+		Player player = event.getPlayer();
 		if (!loginStatus.get(player.getName().toLowerCase())) {
-			evt.setCancelled(true);
+			event.setCancelled(true);
 		}
 	}
 
 	@EventHandler(priority = EventPriority.LOWEST)
-	public void onPlayerEditBook(PlayerEditBookEvent evt) {
+	public void onPlayerEditBook(PlayerEditBookEvent event) {
 		if (!usingBeeLoginMod)
 			return;
-		Player player = evt.getPlayer();
+		Player player = event.getPlayer();
 		if (!loginStatus.get(player.getName().toLowerCase())) {
-			evt.setCancelled(true);
+			event.setCancelled(true);
 		}
 	}
 
 	@EventHandler(priority = EventPriority.LOWEST)
-	public void onPlayerItemConsume(PlayerItemConsumeEvent evt) {
+	public void onPlayerItemConsume(PlayerItemConsumeEvent event) {
 		if (!usingBeeLoginMod)
 			return;
-		Player player = evt.getPlayer();
+		Player player = event.getPlayer();
 		if (!loginStatus.get(player.getName().toLowerCase())) {
-			evt.setCancelled(true);
+			event.setCancelled(true);
 		}
 	}
 
 	@EventHandler(priority = EventPriority.LOWEST)
-	public void onPlayerDropItem(PlayerDropItemEvent evt) {
+	public void onPlayerDropItem(PlayerDropItemEvent event) {
 		if (!usingBeeLoginMod)
 			return;
-		Player player = evt.getPlayer();
+		Player player = event.getPlayer();
 		if (!loginStatus.get(player.getName().toLowerCase())) {
-			evt.setCancelled(true);
+			event.setCancelled(true);
 		}
 	}
 
 	@EventHandler(priority = EventPriority.LOWEST)
-	public void onPlayerPickupItem(PlayerPickupItemEvent evt) {
+	public void onPlayerPickupItem(PlayerPickupItemEvent event) {
 		if (!usingBeeLoginMod)
 			return;
-		Player player = evt.getPlayer();
+		Player player = event.getPlayer();
 		if (!loginStatus.get(player.getName().toLowerCase())) {
-			evt.setCancelled(true);
+			event.setCancelled(true);
 		}
 	}
 
 	@EventHandler(priority = EventPriority.LOWEST)
-	public void onInventoryClick(InventoryClickEvent evt) {
+	public void onInventoryClick(InventoryClickEvent event) {
 		if (!usingBeeLoginMod)
 			return;
-		HumanEntity entity = evt.getWhoClicked();
+		HumanEntity entity = event.getWhoClicked();
 		if (!(entity instanceof Player))
 			return;
 		if (!loginStatus.get(((Player) entity).getName().toLowerCase())) {
-			evt.setCancelled(true);
+			event.setCancelled(true);
 		}
 	}
 
 	@EventHandler(priority = EventPriority.LOWEST)
-	public void onEntityDamage(EntityDamageEvent evt) {
+	public void onEntityDamage(EntityDamageEvent event) {
 		if (!usingBeeLoginMod)
 			return;
-		Entity entity = evt.getEntity();
+		Entity entity = event.getEntity();
 		if (!(entity instanceof Player))
 			return;
 		Player player = (Player) entity;
 		if (!loginStatus.get(player.getName().toLowerCase())) {
-			evt.setCancelled(true);
+			event.setCancelled(true);
 		}
 	}
 
 	@EventHandler(priority = EventPriority.LOWEST)
-	public void onFoodLevelChange(FoodLevelChangeEvent evt) {
+	public void onFoodLevelChange(FoodLevelChangeEvent event) {
 		if (!usingBeeLoginMod)
 			return;
-		HumanEntity EPlayer = evt.getEntity();
+		HumanEntity EPlayer = event.getEntity();
 		if (EPlayer instanceof Player) {
 			Player player = (Player) EPlayer;
 			if (!loginStatus.get(player.getName().toLowerCase())) {
-				evt.setCancelled(true);
+				event.setCancelled(true);
 			}
 		}
 	}
 
 	@EventHandler(priority = EventPriority.LOWEST)
-	public void onMove(PlayerMoveEvent evt) {
+	public void onMove(PlayerMoveEvent event) {
 		if (!usingBeeLoginMod)
 			return;
-		Player player = evt.getPlayer();
+		Player player = event.getPlayer();
 		if (!loginStatus.get(player.getName().toLowerCase())) {
-			evt.setCancelled(true);
+			event.setCancelled(true);
 
 		}
 	}

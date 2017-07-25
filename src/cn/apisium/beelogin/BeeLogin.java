@@ -25,6 +25,7 @@ public class BeeLogin extends JavaPlugin implements Listener {
 		instance = this;
 		logger = this.getLogger();
 		Config.load(this.getConfig());
+		Config.save();
 		if (Config.usingBeeLoginMod) {
 			Bukkit.getMessenger().registerOutgoingPluginChannel(this, "BeeLogin");
 			Bukkit.getMessenger().registerIncomingPluginChannel(this, "BeeLogin", new MessageHandler());
@@ -34,8 +35,7 @@ public class BeeLogin extends JavaPlugin implements Listener {
 		Bukkit.getPluginManager().registerEvents(eventHandler, this);
 		logger.info("BeeLogin加载成功");
 		logger.info("====================");
-		logger.info("蜜蜂工作室 BeeStudio");
-		logger.info("      荣誉出品");
+		logger.info("  Apisium 强力驱动");
 		logger.info("讨论QQ群:  367428642");
 		logger.info("====================");
 		logger.info("当前网页端验证URL:" + Config.checkUrl);
